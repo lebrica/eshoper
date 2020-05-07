@@ -1,43 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block head %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    {% block title %}Home | E-Shopper{% endblock %}
+    <title>{% block title %}Home | E-Shopper{% endblock %}</title>
     {% block stylesheets %}
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/prettyPhoto.css') }}css/prettyPhoto.css" rel="stylesheet">
+        <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
         <link href="{{ asset('css/price-range.css') }}" rel="stylesheet">
         <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
     {% endblock %}
-
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    {% endblock %}
 </head><!--/head-->
 <body>
-{% block body %}
+    <header id="header"><!--header-->
+        {% block header %}
+        <div class="header_top"><!--header_top-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header_top-->
 
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('js/price-range.js') }}"></script>
-    <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <!--[if lt IE 9]>
-        <script src="{{ asset('js/html5shiv.js') }}"></script>
-        <script src="{{ asset('js/respond.min.js') }}"></script>
-        <![endif]-->
-{% endblock %}
+        <div class="header-middle"><!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="index.html"><img src={{ asset('images/home/logo.png') }} alt=""/></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="login.html"><i class="fa fa-unlock"></i> Exit</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-middle-->
+
+        <div class="header-bottom"><!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <li><a href="{{ path('home') }}" class="{% if app.request.attributes.get('_route') == 'home' %}active{% endif %}">Home</a></li>
+                                <li><a href="{{ path('products') }}" class="{% if app.request.attributes.get('_route') == 'products' %}active{% endif %}">Shop</a> </li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact-us.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="search_box pull-right">
+                            <input type="text" placeholder="Search"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-bottom-->
+        {% endblock %}
+    </header><!--/header-->
+    <section>
+        <div class="container">
+            <div class="row">
+                {% block leftSidebar %}
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>Category</h2>
+                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                            {% for category in categories %}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a
+                                                    href="{{ path('category_products', {'slug': category.name }) }}"
+                                                    class="{% if app.request.attributes.get('slug') == category.name %}active{% endif %}">{{ category.name }}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div><!--/category-products-->
+                        <div class="price-range"><!--price-range-->
+                            <h2>Price Range</h2>
+                            <div class="well text-center">
+                                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
+                                       data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
+                                <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+                            </div>
+                        </div><!--/price-range-->
+
+                        <div class="shipping text-center"><!--shipping-->
+                            <img src="{{ asset('images/home/shipping.jpg') }}" alt=""/>
+                        </div><!--/shipping-->
+                    </div>
+                </div>
+                {% endblock %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer"><!--Footer-->
+        {% block footer %}
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </footer><!--/Footer-->
+
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
+        <script src="{{ asset('js/price-range.js') }}"></script>
+        <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/jquery.cycle2.js') }}"></script>
+        <script src="{{ asset('js/jquery.cycle2.carousel.min.js') }}"></script>
+        <!--[if lt IE 9]>
+            <script src="{{ asset('js/html5shiv.js') }}"></script>
+            <script src="{{ asset('js/respond.min.js') }}"></script>
+            <![endif]-->
+    {% endblock %}
+
 </body>
 </html>
 

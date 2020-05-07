@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22012e48-bb9a-4ade-adbf-4a2fcca5e732" name="Default Changelist" comment="" />
+    <list default="true" id="22012e48-bb9a-4ade-adbf-4a2fcca5e732" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.cycle2.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.cycle2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.cycle2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/ProductService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/header.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/login.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/product.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/products.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/science50.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/science50.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SiteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/js/respond.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/paginator.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sendemail.php" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +40,60 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="eshoper@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="eshoper@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="eshoper@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="eshoper: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="eshoper@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="eshoper: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="product: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="Y:\OSPanel\domains\eshoper\.idea" />
+      </set>
+    </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -122,19 +204,25 @@
       <path value="$PROJECT_DIR$/vendor/ocramius/package-versions" />
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1anuUvMzTLzYnrkk1zf3jAvZeSB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="fr.adrienbrault.idea.symfony2plugin.ui.TwigSettingsForm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -150,6 +238,23 @@
       <workItem from="1587422166797" duration="159000" />
       <workItem from="1587422336632" duration="5511000" />
       <workItem from="1587475836623" duration="5619000" />
+      <workItem from="1587562753172" duration="2261000" />
+      <workItem from="1587566579025" duration="2777000" />
+      <workItem from="1587646022423" duration="2539000" />
+      <workItem from="1588022587454" duration="6000" />
+      <workItem from="1588078707024" duration="1199000" />
+      <workItem from="1588081863584" duration="23990000" />
+      <workItem from="1588125495985" duration="8932000" />
+      <workItem from="1588182633728" duration="19513000" />
+      <workItem from="1588252142817" duration="7387000" />
+      <workItem from="1588259678163" duration="10401000" />
+      <workItem from="1588285626829" duration="1332000" />
+      <workItem from="1588316273734" duration="2597000" />
+      <workItem from="1588587857131" duration="65000" />
+      <workItem from="1588666129699" duration="34111000" />
+      <workItem from="1588727732482" duration="5988000" />
+      <workItem from="1588788968339" duration="5582000" />
+      <workItem from="1588863415438" duration="14341000" />
     </task>
     <servers />
   </component>
@@ -157,17 +262,53 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1203" y="333" key="NewPhpClassDialog" timestamp="1587492357950">
+    <state x="-1368" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587566451791">
       <screen x="-1920" y="0" width="1920" height="1160" />
     </state>
-    <state x="-1203" y="333" key="NewPhpClassDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1587492357950" />
+    <state x="-1368" y="230" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1587566451791" />
+    <state x="-1283" y="383" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1588587874537">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1283" y="383" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588587874537" />
+    <state x="-1218" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1588127012553">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1218" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588127012553" />
+    <state x="-1293" y="277" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588728253990">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1293" y="277" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588728253990" />
+    <state x="657" y="307" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1588200943769">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="657" y="307" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040/-1920.0.1920.1160@0.0.1920.1040" timestamp="1588200943769" />
+    <state x="-1230" y="277" key="FileChooserDialogImpl" timestamp="1588727080425">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1230" y="277" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588727080425" />
+    <state width="236" height="590" key="HiddenNamespacesPopup" timestamp="1587566405554">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state width="236" height="590" key="HiddenNamespacesPopup/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1587566405554" />
+    <state x="-1203" y="333" key="NewPhpClassDialog" timestamp="1588083431283">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1203" y="333" key="NewPhpClassDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588083431283" />
     <state x="-1148" y="483" key="NewPhpFileDialog" timestamp="1587422264717">
       <screen x="-1920" y="0" width="1920" height="1160" />
     </state>
     <state x="-1148" y="483" key="NewPhpFileDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1587422264717" />
-    <state x="-1568" y="137" key="SettingsEditor" timestamp="1587423842389">
+    <state x="-1568" y="137" width="1141" height="886" key="SettingsEditor" timestamp="1587648767131">
       <screen x="-1920" y="0" width="1920" height="1160" />
     </state>
-    <state x="-1568" y="137" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1587423842389" />
+    <state x="-1568" y="137" width="1141" height="886" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1587648767131" />
+    <state x="-1480" y="152" key="com.intellij.database.dbimport.ImportDialog" timestamp="1588130305167">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1480" y="152" key="com.intellij.database.dbimport.ImportDialog/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588130305167" />
+    <state x="-1329" y="223" width="738" height="714" key="find.popup" timestamp="1588097269014">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1329" y="223" width="738" height="714" key="find.popup/0.0.1920.1040/-1920.0.1920.1160@-1920.0.1920.1160" timestamp="1588097269014" />
   </component>
 </project>
