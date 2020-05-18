@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'form/form_errors.html.twig' %}
+{% block title %} Registration {% endblock %}
+{% block leftSidebar %}{% endblock %}
+{% block content %}
+    <div class="col-sm-12">
+    <section id="form"><!--form-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="signup-form"><!--sign up form-->
+                        <h2>New User Signup!</h2>
+                        {{ form_start(form,{'attr': {
+                            'class': 'form'
+                        }
+                        }) }}
+                        {{ form_row(form.name,{'attr': {
+                            'class': 'input',
+                            'placeholder': 'username'
+                        },'label': ' '
+                        }) }}
+                        {{ form_row(form.email,{'attr': {
+                            'class': 'alert-danger',
+                            'placeholder': 'email'
+                        },'label': ' '
+                        }) }}
+                        {{ form_row(form.plainPassword.first, {'attr': {
+                            'placeholder': 'password'
+                        },'label': ' '
+                        }) }}
+                        {{ form_row(form.plainPassword.second, {'attr': {
+                            'placeholder': 'repeat password'
+                        },'label': ' '
+                        }) }}
+                        <button type="submit" class="btn btn-default" formnovalidate>Signup</button>
+                        {{ form_end(form) }}
+                    </div><!--/sign up form-->
+                </div>
+            </div>
+        </div>
+    </section><!--/form-->
+    </div>
+{% endblock %}

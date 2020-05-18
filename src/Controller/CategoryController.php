@@ -7,25 +7,28 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Service\ProductService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    private $productService;
+    private $userService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $userService)
     {
-        $this->productService = $productService;
+        $this->userService = $userService;
     }
 
     /**
-     * @return Response
-     * @Route("/login", name="login")
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin", name="admin")
      */
     public function indexView()
     {
-        return $this->render('login.html.twig');
+
+
+        return $this->render('test.html.twig');
     }
 }

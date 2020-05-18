@@ -1441,7 +1441,9 @@ h2.title {
 
 .login-form {}
 
-.signup-form {}
+.signup-form{
+
+}
 
 .login-form h2,
 .signup-form h2 {
@@ -1462,7 +1464,7 @@ h2.title {
     font-size: 14px;
     font-weight: 300;
     height: 40px;
-    margin-bottom: 10px;
+    margin-bottom: -7px;
     outline: medium none;
     padding-left: 10px;
     width: 100%;
@@ -1492,6 +1494,7 @@ h2.title {
     display: block;
     font-family: 'Roboto', sans-serif;
     padding: 6px 25px;
+    margin-top: 18px;
 }
 
 .login-form label {}

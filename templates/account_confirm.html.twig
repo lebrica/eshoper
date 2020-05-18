@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Confirm {% endblock %}
+{% block leftSidebar %}{% endblock %}
+{% block content %}
+    <h5>Поздравляем!</h5>
+    <p>Ваш аккаунт подтвержден, теперь вы можете
+        <a href="{{ path('login') }}">войти</a></p>
+{% endblock %}
