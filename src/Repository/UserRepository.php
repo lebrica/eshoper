@@ -19,7 +19,7 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function save(User $user)
+    public function load($user)
     {
         $this->_em->persist($user);
         $this->_em->flush();
@@ -27,14 +27,39 @@ class UserRepository extends ServiceEntityRepository
         return $user;
     }
 
-    public function changeRole($id, $value)
+    public function update()
+    {
+        $this->_em->flush();
+    }
+
+    public function findSocialId($id)
     {
         return $this->createQueryBuilder('user')
-            ->where('user.id = :id')
+            ->join('user.social', 'social')
+            ->where('social.client_id = :id')
             ->setParameter('id', $id)
-            ->set('user.roles', $value)
             ->getQuery()
-            ->execute()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function changeRole(string $email, string $role)
+    {
+        return $this->createQueryBuilder('user')
+            ->where('user.email = :email')
+            ->setParameter('email', $email)
+            ->set('user.roles', $role)
+            ;
+    }
+
+    public function checkExistEmail(string $email)
+    {
+        return $this->createQueryBuilder('user')
+            ->select('count(user.email)')
+            ->where('user.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getSingleScalarResult()
             ;
     }
 }

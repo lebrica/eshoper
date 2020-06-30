@@ -10,8 +10,11 @@ security:
         main:
             anonymous: lazy
             guard:
+                entry_point: App\Security\LoginFormAuthenticator
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    - App\Security\OauthFacebookAuthenticator
+                    - App\Security\OAuthGoogleAuthenticator
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 2590000 # 30 days in second

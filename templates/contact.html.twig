@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'form/form_errors.html.twig' %}
+{% block title %} Contact {% endblock %}
+{% block leftSidebar %}{% endblock %}
+{% block content %}
+    <div id="contact-page" class="container">
+        <div class="bg">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title text-center">Contact <strong>Us</strong></h2>
+                    <div id="gmap" class="contact-map">
+                    </div>
+                </div>
+            </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="contact-form">
+                <h2 class="title text-center">Get In Touch</h2>
+                <div class="status alert alert-success" {% if message is empty %} style="display: none" {% endif %} > {{ message }}</div>
+                {{ form_start(form,{'attr': {
+                    'class': 'contact-form row'
+                }
+                }) }}
+                <div class="form-group  col-md-6">
+                {{ form_row(form.name,{'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Name'
+                },'label': ' '
+                }) }}
+                </div>
+                <div class="form-group  col-md-6">
+                {{ form_row(form.email,{'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Email'
+                },'label': ' '
+                }) }}
+                </div>
+                <div class="form-group  col-md-12">
+                {{ form_row(form.subject, {'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Subject'
+                },'label': ' '
+                }) }}
+                </div>
+                <div class="form-group  col-md-12">
+                {{ form_row(form.message, {'attr': {
+                    'class': 'form-control message',
+                    'placeholder': 'Your message here'
+                },'label': ' ',
+                  'id': 'message'
+                }) }}
+                </div>
+                <div class="form-group  col-md-12">
+                <button type="submit" class="btn btn-primary pull-right" formnovalidate>Submit</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="contact-info">
+                <h2 class="title text-center">Contact Info</h2>
+                <address>
+                    <p>E-Shopper Inc.</p>
+                    <p>935 W. Webster Ave New Streets Chicago, IL 60614, NY</p>
+                    <p>Newyork USA</p>
+                    <p>Mobile: +2346 17 38 93</p>
+                    <p>Fax: 1-714-252-0026</p>
+                    <p>Email: info@e-shopper.com</p>
+                </address>
+            </div>
+        </div>
+    </div><!--/#contact-page-->
+{% endblock %}

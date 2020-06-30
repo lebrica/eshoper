@@ -3,8 +3,7 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Category;
+use App\Service\FeedbackService;
 use App\Service\ProductService;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -16,10 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private $productService;
+    private $feedbackService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, FeedbackService $feedbackService)
     {
         $this->productService = $productService;
+        $this->feedbackService = $feedbackService;
     }
 
     /**
@@ -27,44 +28,70 @@ class ProductController extends AbstractController
      */
     public function actionIndex(Request $request, PaginatorInterface $paginator)
     {
-        $categories = $this->productService->getCategory();
-        $productQuery = $this->productService->getLatestPaginate();
+        $filters = $this->getFilters($request);
 
-        $products = $paginator->paginate($productQuery, $request->query->getInt('page', 1), 9);
+        $products = $this->productService->findProductsPaginate($filters, $request->query->getInt('page', 1), 9);
 
-        return $this->render('products.html.twig', ['categories' => $categories,
-            'products' => $products
-        ]);
+        return $this->render('products.html.twig', ['products' => $products]);
     }
 
     /**
-     * @Route("/products/{slug}", name="category_products")
+     * @Route("/products/{category}", name="category_products")
      */
-    public function categoryView(Request $request, PaginatorInterface $paginator, $slug)
+    public function categoryView(Request $request, PaginatorInterface $paginator, $category)
     {
-        $categories = $this->productService->getCategory();
-        $productQuery = $this->productService->getOneCategoryPaginate($slug);
+        $filters = $this->getFilters($request, $category);
 
-        $products = $paginator->paginate($productQuery, $request->query->getInt('page', 1), 3);
+        $products = $this->productService->findProductsPaginate($filters, $request->query->getInt('page', 1), 9);
 
-        return $this->render('products.html.twig', ['categories' => $categories,
-            'products' => $products
-        ]);
+        return $this->render('products.html.twig', ['products' => $products]);
     }
 
     /**
-     * @Route("/product{id}", name="one_product", requirements={"id"="\d+"})
+     * @Route("/product/{id}", name="one_product", requirements={"id"="\d+"})
      */
     public function productDetails($id)
     {
-        $categories = $this->productService->getCategory();
         $product = $this->productService->getOneProduct($id);
-        $productsRecommended = $this->productService->getRecommendedProduct(5);
+        $productsRecommended = $this->productService->findRecommendedProduct(5);
+        $productFeedback = $this->feedbackService->findLastComments($id);
+        $avgRating = round($this->feedbackService->findAvgRatingProduct($id));
+        $countComments = $this->feedbackService->findCommentsOneProduct($id);
 
-        return $this->render('product.html.twig', ['categories' => $categories,
+        return $this->render('product.html.twig', [
+            'countComments' => $countComments,
+            'avgRating' => $avgRating,
+            'productFeedback' => $productFeedback,
             'productDetails' => $product['0'],
-            'productsRecommended' => $productsRecommended
+            'productsRecommended' => $productsRecommended,
         ]);
     }
 
+    /**
+     * @Route("/product/comments/{id}", name="product_comments", requirements={"id"="\d+"})
+     */
+    public function allCommentsProduct($id)
+    {
+        $productFeedback = $this->feedbackService->findLastComments($id, 30);
+        $avgRating = round($this->feedbackService->findAvgRatingProduct($id));
+        $countComments = $this->feedbackService->findCommentsOneProduct($id);
+
+        return $this->render('comments_product.html.twig', [
+            'countComments' => $countComments,
+            'avgRating' => $avgRating,
+            'productFeedback' => $productFeedback,
+        ]);
+    }
+
+    private function getFilters($request, $category = null)
+    {
+        if (!$request->query->get('submit_price')) {
+            return ['category' => $category];
+        }
+        return [
+            'category' => $category,
+            'amount1' => $request->query->get('amount1'),
+            'amount2' => $request->query->get('amount2'),
+        ];
+    }
 }

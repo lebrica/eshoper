@@ -1,74 +1,96 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Product {% endblock %}
+
+{% block pricerange %}{% endblock %}
+
 {% block content %}
     <div class="col-sm-9 padding-right">
         <div class="product-details"><!--product-details-->
             <div class="col-sm-5">
                 <div class="view-product">
-                    <img src="images/product-details/1.jpg" alt=""/>
+                    <img src="{{ asset(productDetails.image) }}" alt=""/>
                 </div>
-
-
             </div>
             <div class="col-sm-7">
                 <div class="product-information"><!--/product-information-->
                     <img src="{% if productDetails.new == 1 %}{{ asset('images/product-details/new.jpg') }}{% endif %}" class="newarrival" alt=""/>
                     <h2>{{ productDetails.title }}</h2>
-                    <p>Web ID: {{ productDetails.id }}</p>
-                    <img src="images/product-details/rating1.png" alt=""/>
+                    <p>Product ID: {{ productDetails.productCode }}</p>
+                    <div class="rating-area product">
+                        <ul class="ratings">
+                            <li>
+                                {% for i in 1..5 %}
+                                    <i class="fa fa-star {% if avgRating >= i %}color{% endif %}"></i>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </div><!--/rating-area-->
                     <span>
-									<span>US ${{ productDetails.price }}</span>
-									<label>Quantity:</label>
-									<input type="text" value="3"/>
-									<button type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</button>
-								</span>
+                        <span>US ${{ productDetails.price }}</span>
+                        <a href="javascript: void 0"
+                           class="btn btn-default add-to-cart" data-id="{{ productDetails.id }}">
+                            <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </span>
                     <p><b>Availability:</b>{% if productDetails.availability == 1 %} In Stock{% else %}Not In Stock{% endif %}</p>
                     <p><b>Brand:</b> {{ productDetails.brand }}</p>
                 </div><!--/product-information-->
             </div>
         </div><!--/product-details-->
-
         <div class="category-tab shop-details-tab"><!--feedback-->
             <div class="col-sm-12">
                 <ul class="nav nav-tabs">
-                    <li><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                    <li><a href="{{ path('product_comments', {'id': productDetails.id })}}">Reviews ({{ countComments }})</a></li>
                 </ul>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="reviews">
                     <div class="feedback col-sm-12">
+                        {% for comment in productFeedback %}
                         <ul>
-                            <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                            <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                            <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                            <li><a href=""><i class="fa fa-user"></i>{{ comment.name }}</a></li>
+                            <li><a href=""><i class="fa fa-clock-o"></i>{{ comment.date|date('H:i') }}</a></li>
+                            <li><a href=""><i class="fa fa-calendar-o"></i>{{ comment.date|date('d:M:Y') }}</a></li>
                         </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <p>{{ comment.comments }}</p>
+                        {% endfor %}
                         <p><b>Write Your Review</b></p>
-
-                        <form action="#">
-										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
-										</span>
-                            <textarea name=""></textarea>
-                            <b>Rating: </b> <img src="images/product-details/rating.png" alt=""/>
-                            <button type="button" class="btn btn-default pull-right">
+                        <form action="{{ path('feedback') }}" method="post">
+                            <input type="hidden" name="product_id" value="{{ productDetails.id }}">
+                            <textarea name="textarea"></textarea>
+                            <div class="review_stars_wrap">
+                                <div id="review_stars">
+                                    <input id="star-4" type="radio" name="stars" value="5"/>
+                                    <label title="Отлично" for="star-4">
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <input id="star-3" type="radio" name="stars" value="4"/>
+                                    <label title="Хорошо" for="star-3">
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <input id="star-2" type="radio" name="stars" value="3" checked="checked" />
+                                    <label title="Нормально" for="star-2">
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <input id="star-1" type="radio" name="stars" value="2"/>
+                                    <label title="Плохо" for="star-1">
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <input id="star-0" type="radio" name="stars" value="1"/>
+                                    <label title="Ужасно" for="star-0">
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    Rating:
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default pull-right">
                                 Submit
                             </button>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div><!--/feedback-->
-
         <div class="recommended_items"><!--recommended_items-->
             <h2 class="title text-center">recommended items</h2>
             <div class="cycle-slideshow"
@@ -84,13 +106,16 @@
                     <div class="item">
                         <div class="product-image-wrapper">
                             <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="{{ asset(productRecommend.image) }}" alt="">
-                                    <h2>{{ productRecommend.price }}$</h2>
-                                    <p>{{ productRecommend.title }}</p>
-                                    <a href="{{ productRecommend.id }}" class="btn btn-default add-to-cart">
-                                        <i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
+                                <a href="{{ path('one_product', {'id': productRecommend.id }) }}">
+                                    <div class="productinfo text-center">
+                                        <img src="{{ asset(productRecommend.image) }}" alt="">
+                                        <h2>{{ productRecommend.price }}$</h2>
+                                        <p>{{ productRecommend.title }}</p>
+                                        <a href="javascript: void 0"
+                                           class="btn btn-default add-to-cart" data-id="{{ productRecommend.id }}">
+                                            <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -105,6 +130,5 @@
                 </a>
             </div>
         </div><!--/recommended_items-->
-
     </div>
 {% endblock %}

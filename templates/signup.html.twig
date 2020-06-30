@@ -11,6 +11,7 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="signup-form"><!--sign up form-->
                         <h2>New User Signup!</h2>
+                        <div class="status alert alert-success" {% if message is empty %} style="display: none" {% endif %} > {{ message }}</div>
                         {{ form_start(form,{'attr': {
                             'class': 'form'
                         }
@@ -21,7 +22,6 @@
                         },'label': ' '
                         }) }}
                         {{ form_row(form.email,{'attr': {
-                            'class': 'alert-danger',
                             'placeholder': 'email'
                         },'label': ' '
                         }) }}

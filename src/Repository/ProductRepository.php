@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -20,6 +22,19 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function load($object)
+    {
+        $this->_em->persist($object);
+        $this->_em->flush();
+
+        return $object;
+    }
+
+    public function update()
+    {
+        $this->_em->flush();
+    }
+
     public function findOne($id)
     {
         return $this->createQueryBuilder('product')
@@ -27,26 +42,6 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->execute()
-            ;
-    }
-
-    public function findLatestPaginate()
-    {
-        return $this->createQueryBuilder('product')
-            ->where('product.status = 1')
-            ->orderBy('product.id', 'DESC')
-            ->getQuery()
-        ;
-    }
-
-    public function findOneCategoryProducts(string $category)
-    {
-        return $this->createQueryBuilder('product')
-            ->where('product.status = 1')
-            ->join('product.category', 'category')
-            ->andWhere("category.name = :name")
-            ->setParameter('name', $category)
-            ->getQuery()
             ;
     }
 
@@ -62,7 +57,7 @@ class ProductRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findLatest($count)
+    public function findLastProducts($count)
     {
         return $this->createQueryBuilder('product')
             ->where('product.status = 1')
@@ -73,4 +68,45 @@ class ProductRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findProductsByIds(array $ids)
+    {
+        return $this->createQueryBuilder('product')
+            ->where('product.status = 1')
+            ->andWhere('product.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
+    public function findProductsPaginate(array $filter): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('product')
+            ->where('product.status = 1');
+            if (isset($filter['category'])) {
+                $qb
+                    ->join('product.category', 'category')
+                    ->where('category.name = :category')
+                    ->setParameter('category', $filter['category'])
+                ;
+            }
+             if (isset($filter['amount1'], $filter['amount2'])) {
+                $qb
+                     ->andWhere('product.price BETWEEN :price1 AND :price2')
+                     ->setParameter('price1', $filter['amount1'])
+                     ->setParameter('price2', $filter['amount2'])
+                ;
+        }
+         return $qb;
+    }
+
+    public function findProductByTitlePaginate($title): QueryBuilder
+    {
+        return $this->createQueryBuilder('product')
+            ->orderBy('product.id', 'DESC')
+            ->where('product.status = 1')
+            ->where("product.title LIKE :title")
+            ->setParameter('title', '%'.$title.'%')
+            ;
+    }
 }

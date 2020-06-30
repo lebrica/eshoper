@@ -7,7 +7,11 @@
     <ul>
 {#        {% for product in category_product %}#}
 {#            <h3>Product {{ product.id }}</h3>#}
+{% for val in data %}
+        <li>{{ val }}</li>
 
+    {% endfor %}
+{{ name }}
 
 {#            <li><a href="">{{ product.title }}</a></li>#}
 {#            <li><a href="">{{ product.price }}</a></li>#}

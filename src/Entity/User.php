@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -16,6 +18,7 @@ class User implements UserInterface
 {
 
     public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
      * @ORM\Id()
@@ -25,10 +28,15 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(message="Имя не должен быть пустым.")
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SocialUser", mappedBy="user")
+     */
+    private $social;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -38,7 +46,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
 
@@ -53,10 +61,6 @@ class User implements UserInterface
      */
     private $roles = [];
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $status = 1;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -68,10 +72,25 @@ class User implements UserInterface
      */
     private $enabled;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="user")
+     */
+    private $feedback;
+
     public function __construct()
     {
+        $this->social = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
         $this->roles = [self::ROLE_USER];
         $this->enabled = false;
+    }
+
+    public function fromSocialRequest(string $email, string $name): User
+    {
+        $this->email = $email;
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -120,18 +139,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -142,7 +149,7 @@ class User implements UserInterface
 
     public function setRoles($roles): self
     {
-        $this->roles = $roles;
+        $this->roles = [$roles];
 
         return $this;
     }
@@ -191,6 +198,22 @@ class User implements UserInterface
         $this->plainPassword = $plainPassword;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|SocialUser[]
+     */
+    public function getSocial(): Collection
+    {
+        return $this->social;
+    }
+
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
     }
 
 }

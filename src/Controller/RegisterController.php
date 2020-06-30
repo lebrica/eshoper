@@ -17,7 +17,7 @@ class RegisterController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, UserService $userService, EventDispatcherInterface $eventDispatcher)
+    public function actionRegister(Request $request, UserService $userService, EventDispatcherInterface $eventDispatcher)
     {
         $user = new User;
 
@@ -30,10 +30,14 @@ class RegisterController extends AbstractController
 
             $userRegisteredEvent = new RegisteredUserEvent($user);
             $eventDispatcher->dispatch($userRegisteredEvent, RegisteredUserEvent::NAME);
-
+            return $this->render('signup.html.twig', [
+                'form' => $form->createView(),
+                'message' => 'Подтвердите регистрацию на своей почте'
+            ]);
         }
         return $this->render('signup.html.twig', [
             'form' => $form->createView(),
+            'message' => ''
         ]);
     }
 
@@ -42,18 +46,12 @@ class RegisterController extends AbstractController
      */
     public function confirmEmail(UserService $userService, string $code)
     {
-        $user = $userService->confirmCode($code);
+        $userService->confirmed($code);
 
-        if ($user === null) {
+        if ($userService->confirmed($code) === false) {
             return new Response('404');
         }
 
-        $user->setEnabled(true);
-        $user->setConfirmationCode('');
-
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
-
-        return $this->render('account_confirm.html.twig', ['user' => $user]);
+        return $this->render('account_confirm.html.twig');
     }
 }

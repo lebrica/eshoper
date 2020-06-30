@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Products {% endblock %}
+
 {% block content %}
     <div class="col-sm-9 padding-right">
         <div class="features_items"><!--features_items-->
@@ -15,9 +16,9 @@
                                         <img src="{{ asset(product.image) }}" alt=""/>
                                         <h2>{{ product.price }}$</h2>
                                         <p>{{ product.title }}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    </div>
+                                        <a href="javascript: void 0" class="btn btn-default add-to-cart" data-id="{{ product.id }}">
+                                        <i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                      </div>
                                     <img src="{% if product.new == 1 %}{{ asset('images/home/new.png') }}{% endif %} " class="new" alt="" />
                                 </a>
                             </div>
@@ -29,7 +30,6 @@
             <div class="col-sm-12">
                 {{ knp_pagination_render(products) }}
             </div>
-
         </div><!--features_items-->
     </div>
 

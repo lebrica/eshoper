@@ -1,116 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    {% block head %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>{% block title %}Home | E-Shopper{% endblock %}</title>
-    {% block stylesheets %}
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/price-range.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-    {% endblock %}
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    {% endblock %}
-</head><!--/head-->
-<body>
-    <header id="header"><!--header-->
-        {% block header %}
-        <div class="header_top"><!--header_top-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="contactinfo">
-                            <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="social-icons pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/header_top-->
-
-        <div class="header-middle"><!--header-middle-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="logo pull-left">
-                            <a href="{{ path('home') }}"><img src={{ asset('images/home/logo.png') }} alt=""/></a>
-                        </div>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="shop-menu pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{{ path('account') }}"><i class="fa fa-user"></i> Account</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                {% if is_granted('ROLE_USER') %}
-                                <li><a href="{{ path('logout') }}" ><i class="fa fa-unlock"></i> Logout</a></li>
-                                {% else %}
-                                    <li><a href="{{ path('register') }}"><i class="fa fa-sign-in"></i> Signup</a></li>
-                                <li><a href="{{ path('login') }}" ><i class="fa fa-lock"></i> Login</a></li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/header-middle-->
-
-        <div class="header-bottom"><!--header-bottom-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                    data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="mainmenu pull-left">
-                            <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="{{ path('home') }}" class="{% if app.request.attributes.get('_route') == 'home' %}active{% endif %}">Home</a></li>
-                                <li><a href="{{ path('products') }}" class="{% if app.request.attributes.get('_route') == 'products' %}active{% endif %}">Shop</a> </li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact-us.html">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <input type="text" placeholder="Search"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/header-bottom-->
+{% block head %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>{% block title %}Home | E-Shopper{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet"/>
+            <link href="{{ asset('css/rating.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/price-range.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
         {% endblock %}
-    </header><!--/header-->
-    <section>
+        <link rel="shortcut icon" href="images/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    </head><!--/head-->
+{% endblock %}
+<body>
+{% block header %}
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
         <div class="container">
             <div class="row">
-                {% block leftSidebar %}
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ path('connect_facebook') }}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{ path('connect_google') }}"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="{{ path('home') }}"><img src={{ asset('images/home/logo.png') }} alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin') }}"><i class="fa fa-user"></i> Admin</a></li>
+                            {% endif %}
+                            <li><a href="{{ path('product_cart') }}"><i class="fa fa-shopping-cart"></i> Cart (<span
+                                            id="cart-count">{{ count_in_cart }}</span>)</a></li>
+
+                            {% if is_granted('ROLE_USER') %}
+                                <li><a href="{{ path('logout') }}"><i class="fa fa-unlock"></i> Logout</a></li>
+                            {% else %}
+                                <li><a href="{{ path('register') }}"><i class="fa fa-sign-in"></i> Signup</a></li>
+                                <li><a href="{{ path('login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-middle-->
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="{{ path('home') }}"
+                                   class="{% if app.request.attributes.get('_route') == 'home' %}active{% endif %}">Home</a>
+                            </li>
+                            <li><a href="{{ path('products') }}"
+                                   class="{% if app.request.attributes.get('_route') == 'products' %}active{% endif %}">Shop</a>
+                            </li>
+                            <li><a href="{{ path('contact') }}"
+                                   class="{% if app.request.attributes.get('_route') == 'contact' %}active{% endif %}">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="search_box pull-right">
+                        <form action="{{ path('search_product') }}" method="get">
+                            <input type="text" name="search" placeholder="Search Product"/>
+                            <button type="submit" class="btn btn-default pull-right">
+                                Search
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+    {% endblock %}
+</header><!--/header-->
+<section>
+    <div class="container">
+        <div class="row">
+            {% block leftSidebar %}
                 <div class="col-sm-3">
                     <div class="left-sidebar">
                         <h2>Category</h2>
@@ -119,37 +135,44 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a
-                                                    href="{{ path('category_products', {'slug': category.name }) }}"
-                                                    class="{% if app.request.attributes.get('slug') == category.name %}active{% endif %}">{{ category.name }}
+                                                    href="{{ path('category_products', {'category': category.name }) }}"
+                                                    class="{% if app.request.attributes.get('category') == category.name %}active{% endif %}">{{ category.name }}
                                             </a>
                                         </h4>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div><!--/category-products-->
+                        {% block pricerange %}
                         <div class="price-range"><!--price-range-->
                             <h2>Price Range</h2>
                             <div class="well text-center">
-                                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
-                                       data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
-                                <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+                                <div class="price-range">
+                                    <p id="amount">
+                                    <div id="slider-range"></div>
+                                    <form method="get">
+                                        <input type="hidden" name="amount1" value="50" id="amount1">
+                                        <input type="hidden" name="amount2" value="200" id="amount2">
+                                        <button class="button" type="submit" name="submit_price" value="Submit">Search
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div><!--/price-range-->
-
-                        <div class="shipping text-center"><!--shipping-->
-                            <img src="{{ asset('images/home/shipping.jpg') }}" alt=""/>
-                        </div><!--/shipping-->
+                        {% endblock %}
                     </div>
+                    <div class="shipping text-center"><!--shipping-->
+                        <img src="{{ asset('images/home/shipping.jpg') }}" alt=""/>
+                    </div><!--/shipping-->
                 </div>
-                {% endblock %}
+            {% endblock %}
 
-                {% block content %}{% endblock %}
-            </div>
+            {% block content %}{% endblock %}
         </div>
-    </section>
-
+    </div>
+</section>
+{% block footer %}
     <footer id="footer"><!--Footer-->
-        {% block footer %}
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
@@ -159,25 +182,25 @@
                 </div>
             </div>
         </div>
-        {% endblock %}
     </footer><!--/Footer-->
+{% endblock %}
 
-
-    {% block javascripts %}
-        <script src="{{ asset('js/jquery.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
-        <script src="{{ asset('js/price-range.js') }}"></script>
-        <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
-        <script src="{{ asset('js/jquery.cycle2.js') }}"></script>
-        <script src="{{ asset('js/jquery.cycle2.carousel.min.js') }}"></script>
-        <!--[if lt IE 9]>
-            <script src="{{ asset('js/html5shiv.js') }}"></script>
-            <script src="{{ asset('js/respond.min.js') }}"></script>
-            <![endif]-->
-    {% endblock %}
-
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/price-range-2.js') }}"></script>
+    <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ asset('js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/jquery.cycle2.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.cycle2.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
+    <!--[if lt IE 9]>
+        <script src="{{ asset('js/html5shiv.js') }}"></script>
+        <script src="{{ asset('js/respond.min.js') }}"></script>
+    <![endif]-->
+{% endblock %}
 </body>
 </html>
 

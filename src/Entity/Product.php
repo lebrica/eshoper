@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,19 +24,19 @@ class Product
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products", cascade={"persist"})
      */
     private $category;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $status;
+    private $status = 1;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $availability;
+    private $availability = 1;
 
     /**
      * @ORM\Column(type="float")
@@ -70,6 +72,16 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $recommended = 1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="product")
+     */
+    private $feedback;
+
+    public function __construct()
+    {
+        $this->feedback = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -215,5 +227,12 @@ class Product
         return $this;
     }
 
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
 
 }

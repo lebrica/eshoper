@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Cart {% endblock %}
+{% block leftSidebar %}{% endblock %}
+{% block content %}
+    <section id="cart_items">
+        <div class="container">
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="cart_description">
+                            <h2>Корзина Пуста</h2>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+{% endblock %}

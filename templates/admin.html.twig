@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Home | E-Shopper</title>{% endblock %}
+{% block leftSidebar %}{% endblock %}
+{% block content %}
+    <section id="cart_items">
+        <div class="container">
+            <div class="status alert alert-success" {% if message is empty %} style="display: none" {% endif %} > {{ message }}</div>
+            <div class="step-one">
+                <h2 class="heading">Change Role</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 shopper-info">
+                    <form action="{{ path('change_role') }}" method="post">
+                        <input type="email" name="email" placeholder="Email">
+                        <select name="role">
+                            <option value='ROLE_USER'>ROLE_USER</option>
+                            <option value='ROLE_ADMIN'>ROLE_ADMIN</option>
+                        </select>
+                        <button class="btn btn-primary" value="submit" type="submit">Change</button>
+                    </form>
+                </div>
+            </div><!--/change-role-->
+            <div class="shopper-informations">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="step-one">
+                            <h2 class="heading">Add new product</h2>
+                        </div>
+                        <div class="shopper-info">
+                            <form action="{{ path('add_product') }}" method="post">
+                                <input type="text" name="image-path" placeholder="image path">
+                                <input type="text" name="title" placeholder="title">
+                                <input type="text" name="price" placeholder="price">
+                                <input type="text" name="brand" placeholder="brand">
+                                <select name="category">
+                                    {% for category in categories %}
+                                        <option value="{{ category.sortOrder }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <textarea name="description" id="description" cols="30" rows="5" placeholder="description"></textarea>
+                                <div>
+                                    <input type="radio" id="new"
+                                           name="new" value="1" checked>
+                                    <label for="new">new</label>
+                                    <input type="radio" id="no-new"
+                                           name="new" value="0">
+                                    <label for="no-new">no new</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="recommended"
+                                           name="recommended" value="1" checked>
+                                    <label for="recommended">recommended</label>
+                                    <input type="radio" id="no-recommended"
+                                           name="recommended" value="0">
+                                    <label for="no-recommended">no recommended</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="availability"
+                                           name="availability" value="1" checked>
+                                    <label for="availability">availability</label>
+                                    <input type="radio" id="no-availability"
+                                           name="availability" value="0">
+                                    <label for="no-availability">no availability</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="show"
+                                           name="status" value="1" checked>
+                                    <label for="show">show</label>
+                                    <input type="radio" id="no-show"
+                                           name="status" value="0">
+                                    <label for="no-show">no show</label>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Add Product</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="step-one">
+                            <h2 class="heading">Add new category</h2>
+                        </div>
+                        <div class="shopper-info">
+                            <form action="{{ path('add_category') }}" method="post">
+                                <input type="text" name="category" placeholder="category">
+                                <div>
+                                    <input type="radio" id="show-category"
+                                           name="status-category" value="1" checked>
+                                    <label for="show-category">show</label>
+                                    <input type="radio" id="no-show-category"
+                                           name="status-category" value="0">
+                                    <label for="no-show-category">no show</label>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Add Category</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section> <!--/#cart_items-->
+
+{% endblock %}

@@ -19,7 +19,7 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-   public function all()
+   public function findAllCategory()
    {
        return $this->createQueryBuilder('category')
            ->getQuery()
@@ -27,4 +27,12 @@ class CategoryRepository extends ServiceEntityRepository
            ;
    }
 
+   public function findLastCategorySortOrder()
+   {
+       return $this->createQueryBuilder('category')
+           ->select('max(category.sort_order)')
+           ->getQuery()
+           ->getSingleScalarResult()
+           ;
+   }
 }

@@ -121,3 +121,44 @@
 .slider-handle.triangle {
   background: transparent none;
 }
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+  background: #fefefe !important;
+  border-radius: 10px;
+}
+
+.ui-widget.ui-widget-content {
+  margin-left: 10px;
+  border: 1px solid #d39e00!important;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.ui-widget-header {
+  border: 2px solid #ddd;
+  border-top: 2px #ddd!important;
+  background: #ff9f3d!important;
+  color: #333;
+  font-weight: bold;
+}
+
+.ui-slider .ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  width: 1.0em;
+  height: 1.0em;
+  cursor: default;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.price-range button {
+  background: #FE980F;
+  border: 0 none;
+  height: 18px;
+  width: 70px;
+  border-radius: 0;
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
