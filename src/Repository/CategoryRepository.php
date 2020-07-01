@@ -35,4 +35,5 @@ class CategoryRepository extends ServiceEntityRepository
            ->getSingleScalarResult()
            ;
    }
+
 }

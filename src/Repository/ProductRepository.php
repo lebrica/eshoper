@@ -22,7 +22,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function load($object)
+    public function save($object)
     {
         $this->_em->persist($object);
         $this->_em->flush();
@@ -33,6 +33,14 @@ class ProductRepository extends ServiceEntityRepository
     public function update()
     {
         $this->_em->flush();
+    }
+
+    public function delete($object)
+    {
+        $this->_em->remove($object);
+        $this->_em->flush();
+
+        return $object;
     }
 
     public function findOne($id)

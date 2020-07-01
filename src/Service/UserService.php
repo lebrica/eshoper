@@ -33,7 +33,7 @@ class UserService
         $user->setPassword($password);
         $user->setConfirmationCode($this->codeGenerator->getConfirmationCode());
 
-        return $this->userRepository->load($user);
+        return $this->userRepository->save($user);
     }
 
     public function confirmed($code)
@@ -49,23 +49,20 @@ class UserService
         return $user;
     }
 
-    public function changeRole($email, $role)
+    public function changeRole($email, $role): ?User
     {
         $user = $this->userRepository->findOneBy(['email' => $email]);
+        if ($user === null) {
+            return null;
+        }
         $user->setRoles($role);
+        $this->userRepository->update();
 
-        return $this->userRepository->update();
+        return $user;
     }
 
     public function confirmCode(string $code): ?object
     {
         return $this->userRepository->findOneBy(['confirmationCode' => $code]);
-    }
-    /*
-     * 1 - email exist, 0 - email not exist
-     */
-    public function checkExistEmail(string $email): int
-    {
-        return $this->userRepository->checkExistEmail($email);
     }
 }

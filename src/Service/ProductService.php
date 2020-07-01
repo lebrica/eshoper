@@ -60,7 +60,7 @@ class ProductService
         return $this->productRepository->findOne($id);
     }
 
-    public function addNewProduct(array $data)
+    public function addNewProduct(array $data): Product
     {
         $product = new Product();
         $category = $this->categoryRepository->findOneBy(['sort_order' => $data['category']]);
@@ -77,7 +77,7 @@ class ProductService
         $product->setAvailability($data['availability']);
         $product->setStatus($data['status']);
 
-        return $this->productRepository->load($product);
+        return $this->productRepository->save($product);
     }
 
     public function addNewCategory(array $data)
@@ -89,6 +89,28 @@ class ProductService
         $category->setStatus($data['status-category']);
         $category->setSortOrder($lastSortOrder+1);
 
-        return $this->productRepository->load($category);
+        return $this->productRepository->save($category);
+    }
+
+    public function deleteProduct(int $productCode): ?Product
+    {
+        $product = $this->productRepository->findOneBy(['product_code' => $productCode]);
+        if ($product === null) {
+            return null;
+        }
+        return $this->productRepository->delete($product);
+    }
+
+    public function changeStatusCategory($nameCategory): Category
+    {
+        $category = $this->categoryRepository->findOneBy(['name' => $nameCategory]);
+        if ($category->getStatus() === 1) {
+            $category->setStatus(0);
+        } else {
+            $category->setStatus(1);
+        }
+        $this->productRepository->update();
+
+        return $category;
     }
 }

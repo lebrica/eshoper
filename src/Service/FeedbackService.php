@@ -24,7 +24,7 @@ class FeedbackService
         $this->feedbackRepository = $feedbackRepository;
     }
 
-    public function addFeedback(int $userId, int $productId, $comment, $rating)
+    public function addFeedback(int $userId, int $productId, $comment, $rating): Feedback
     {
         $user = $this->userRepository->find($userId);
         $product = $this->productRepository->find($productId);
@@ -36,7 +36,7 @@ class FeedbackService
         $feedback->setUser_id($user);
         $feedback->setProduct_id($product);
 
-        return $this->productRepository->load($feedback);
+        return $this->productRepository->save($feedback);
     }
 
     public function findLastComments(int $id, int $count = 3): array

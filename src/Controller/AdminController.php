@@ -30,14 +30,14 @@ class AdminController extends  AbstractController
      */
     public function changeRoleUser(Request $request, UserService $userService)
     {
+        $email = $request->get('email');
+        $role = $request->get('role');
         if ($request->isMethod('POST')) {
-            $email = $request->get('email');
-            $role = $request->get('role');
-            if ($userService->checkExistEmail($email) === 1) {
+            if ($userService->changeRole($email, $role) === null) {
+                $message = 'Пользователя с таким email нет';
+            } else {
                 $userService->changeRole($email, $role);
                 $message = 'Роль пользователя изменена';
-            } else {
-                $message = 'Пользователя с таким email нет';
             }
             return $this->render('admin.html.twig', ['message' => $message] );
         }
@@ -55,13 +55,13 @@ class AdminController extends  AbstractController
             foreach ($data as $field => $val) {
                 if ($val === '') {
                     $message = 'Заполните поле - ' .$field;
-                    return $this->render('admin.html.twig', ['message' => $message] );
+                    return $this->render('admin.html.twig', ['message' => $message]);
                 }
             }
             $productService->addNewProduct($data);
             return $this->render('admin.html.twig', ['message' => 'Продукт добавлен']);
         }
-            return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('admin');
     }
 
     /**
@@ -79,6 +79,39 @@ class AdminController extends  AbstractController
             $productService->addNewCategory($data);
             $message = 'Категория добавлена';
             return $this->render('admin.html.twig', ['message' => $message] );
+        }
+        return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/admin/delete-product", name="delete_product")
+     */
+    public function deleteProduct(Request $request, ProductService $productService)
+    {
+        $productCode = $request->get('product-code');
+
+        if ($request->isMethod('POST')) {
+            if ($productService->deleteProduct($productCode) === null) {
+                $message = 'Продукта с таким кодом нет';
+            } else {
+                $productService->deleteProduct($productCode);
+                $message = 'Продукт удален';
+            }
+            return $this->render('admin.html.twig', ['message' => $message]);
+        }
+        return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/admin/change-status-category", name="change_status_category")
+     */
+    public function changeStatusCategory(Request $request, ProductService $productService)
+    {
+        $nameCategory = $request->get('category');
+
+        if ($request->isMethod('POST')) {
+            $productService->changeStatusCategory($nameCategory);
+            return $this->render('admin.html.twig', ['message' => 'Статус категории изменен']);
         }
         return $this->redirectToRoute('admin');
     }

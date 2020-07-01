@@ -10,7 +10,7 @@
                 <h2 class="heading">Change Role</h2>
             </div>
             <div class="row">
-                <div class="col-sm-6 shopper-info">
+                <div class="col-sm-4 shopper-info">
                     <form action="{{ path('change_role') }}" method="post">
                         <input type="email" name="email" placeholder="Email">
                         <select name="role">
@@ -23,9 +23,9 @@
             </div><!--/change-role-->
             <div class="shopper-informations">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="step-one">
-                            <h2 class="heading">Add new product</h2>
+                            <h2 class="heading">Add new Product</h2>
                         </div>
                         <div class="shopper-info">
                             <form action="{{ path('add_product') }}" method="post">
@@ -38,7 +38,8 @@
                                         <option value="{{ category.sortOrder }}">{{ category.name }}</option>
                                     {% endfor %}
                                 </select>
-                                <textarea name="description" id="description" cols="30" rows="5" placeholder="description"></textarea>
+                                <textarea name="description" id="description" cols="30" rows="5"
+                                          placeholder="description"></textarea>
                                 <div>
                                     <input type="radio" id="new"
                                            name="new" value="1" checked>
@@ -75,9 +76,21 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="step-one">
-                            <h2 class="heading">Add new category</h2>
+                            <h2 class="heading">Delete Product</h2>
+                        </div>
+                        <div class="shopper-info">
+                            <form action="{{ path('delete_product') }}" method="post">
+                                <input type="text" name="product-code" placeholder="product code">
+                                <button class="btn btn-primary" type="submit">Delete Product</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                    <div class="col-sm-12">
+                        <div class="step-one">
+                            <h2 class="heading">Add new Category</h2>
                         </div>
                         <div class="shopper-info">
                             <form action="{{ path('add_category') }}" method="post">
@@ -92,6 +105,22 @@
                                 </div>
                                 <button class="btn btn-primary" type="submit">Add Category</button>
                             </form>
+                        </div>
+                    </div>
+                        <div class="col-sm-12">
+                            <div class="step-one">
+                                <h2 class="heading">Hide-Show Category</h2>
+                            </div>
+                            <div class="shopper-info">
+                                <form action="{{ path('change_status_category') }}" method="post">
+                                    <select name="category">
+                                        {% for category in categories %}
+                                            <option value="{{ category.name }}">{{ category.name }}{% if category.status == 0 %} - Hide{% endif %}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button class="btn btn-primary" type="submit">Change Status</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
